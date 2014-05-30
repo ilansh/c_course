@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <math.h>
+
+#define X_MIN -35
+#define X_MAX 35
+#define Y_MIN -10
+#define Y_MAX 10
+#define TOLERANCE 0.5
+
+double getCoefficient(char coefficient_name)
+{
+    double coefficient_value;
+    printf("Select %c:\n", coefficient_name);
+    scanf("%lf",&coefficient_value);
+    return coefficient_value;
+}
+
+void printPolynomial(double a,double b,double c,double d)
+{
+    printf("y(x)=(%.3f)+(%.3f)*x+(%.3f)*x^2+(%.3f)*x^3\n",a,b,c,d);
+}
+
+void drawGraph(double a, double b, double c, double d)
+{
+    int x,y;
+    for(y = Y_MAX; y >= Y_MIN; y--)
+    {
+        for(x = X_MIN; x <= X_MAX; x++)
+        {
+            if(fabs(a+b*x+c*x*x+d*x*x*x - y) < TOLERANCE)
+            {
+                printf("*");
+            }
+            else if(x==0 && y==0)
+            {
+                printf("+");
+            }
+            else if(x==0)
+            {
+                printf("|");
+            }
+            else if(y==0)
+            {
+                printf("-");
+            }
+            else
+            {
+                printf(" ");
+            }
+        }
+        printf("\n");
+    }       
+}
+
+int main()
+{
+    //polynomial coefficients a,b,c,d:
+    double a,b,c,d;
+    printf("y(x)=a+b*x+c*x^2+d*x^3\n");
+    a = getCoefficient('a');
+    b = getCoefficient('b');
+    c = getCoefficient('c');
+    d = getCoefficient('d');
+    printPolynomial(a,b,c,d);
+    drawGraph(a,b,c,d);
+    return 1;
+}

@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+#define LOWER_UPPER_DIFFERENCE 32
+#define NUMBER_VALUE_DIFFERENCE 48
+#define LOWER_A_ASCII 97
+#define LOWER_Z_ASCII 123
+#define UPPER_A_ASCII 64
+#define UPPER_Z_ASCII 91
+#define ZERO_ASCII 48
+#define NINE_ASCII 57
+int main()
+{
+    char user_char;
+    //scanf("%c",&userChar);
+    user_char = getchar();
+    printf("%c->",user_char);
+    if(user_char >= LOWER_A_ASCII && user_char <= LOWER_Z_ASCII)
+    {
+        printf("%c",user_char - LOWER_UPPER_DIFFERENCE);
+    }
+    else if(user_char >= UPPER_A_ASCII && user_char <= UPPER_Z_ASCII)
+    {
+        printf("%c",user_char + LOWER_UPPER_DIFFERENCE);
+    }
+    else if(user_char >= ZERO_ASCII && user_char <= NINE_ASCII)
+    {
+        printf("%d",(user_char - NUMBER_VALUE_DIFFERENCE) *
+               (user_char - NUMBER_VALUE_DIFFERENCE));
+    }
+    else
+    {
+        printf("%c",user_char);
+    }
+    printf("\n");
+    return 1;
+}

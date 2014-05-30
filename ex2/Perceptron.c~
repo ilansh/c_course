@@ -1,0 +1,78 @@
+#include "IOHelper.h"
+#include <stdio.h>
+#include "Separator.h"
+
+#define TAG_ASCII_DIFFERENCE 79
+
+void initSeparator(double *separator,const int vector_size)
+{
+	int i;
+	for(i=0; i<vector_size; i++)
+	{
+		separator[i] = 1;
+	}
+}
+
+void updateSeparator(double *separator,double *sample,Tag tag, const int vector_size)
+{
+	int i;
+	for(i=0; i<vector_size; i++)
+	{
+		separator[i]+= (tag*sample[i]);
+	}
+}
+
+void writeSeparatorToFile(FILE* output_file, double *separator, const int vector_size)
+{
+	int i;
+	for(i=0; i<vector_size-1; i++)
+	{
+		fprintf(output_file,"%lf,",separator[i]);
+	}
+	fprintf(output_file,"%lf\n",separator[vector_size-1]);
+}
+
+void perceptron(FILE* input_file, FILE* output_file, const int vector_size)
+{
+	double cur_separator[MAX_DIMENSION];
+	double cur_sample[MAX_DIMENSION];
+	char cur_sample_tag;
+	char cur_calc_tag;
+	initSeparator(cur_separator,vector_size);
+	writeSeparatorToFile(output_file,cur_separator,vector_size); //initial write
+	while((cur_sample_tag = getSampleVectorFromFile(input_file,cur_sample,vector_size))
+					!= END_FILE) //if cur_sample_tag gets -2, it means the samples file had ended
+	{
+		cur_calc_tag = tagNewDataPoint(cur_sample,cur_separator,vector_size)
+				+ TAG_ASCII_DIFFERENCE; //casting to the matching ascii code to get P/N
+		if(cur_calc_tag != cur_sample_tag)
+		{
+			//casting tag back to -1/1
+			updateSeparator(cur_separator,cur_sample,
+					cur_sample_tag - TAG_ASCII_DIFFERENCE,vector_size);
+		}
+		writeSeparatorToFile(output_file,cur_separator,vector_size);
+	}
+
+}
+
+int main(int argc, char *argv[])
+{
+	if(isValidArgumentsNum(argc,"Usage: Perceptron <input file> <output file>\n"))
+	{
+		//making sure files opened properly, and closing only opened files when done.
+		FILE* input_file = fopen(argv[1],"r");
+		if(isFileOpen(input_file,argv[1]))
+		{
+			FILE* output_file = fopen(argv[2],"w");
+			if(isFileOpen(output_file,argv[2]))
+			{
+				int vector_size = getSampleVectorsSize(input_file);
+				perceptron(input_file,output_file,vector_size);
+				fclose(output_file);
+			}
+			fclose(input_file);
+		}
+	}
+	return 0;
+}

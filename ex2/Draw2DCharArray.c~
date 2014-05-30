@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include "Draw2DCharArray.h"
+
+
+void initializeArray(char arr[ROWS][COLS])
+{
+    int i,j;
+    for(i=0; i<ROWS; i++)
+    {
+        for(j=0;j<COLS;j++)
+        {
+            arr[i][j] = ' ';
+        }
+    }
+}
+
+
+void DrawArray(char arr[ROWS][COLS])
+{
+    int i,j;
+    for(i=0;i<ROWS;i++)
+    {
+        for(j=0;j<COLS;j++)
+        {
+            printf("%c",arr[i][j]);
+        }
+        printf("\n");
+    }
+}

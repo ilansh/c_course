@@ -1,0 +1,24 @@
+#ifndef IOHEPLER_H
+#define IOHELPER_H
+
+#include <stdio.h>
+
+#define TRUE 1
+#define FALSE 0
+#define END_FILE -2
+#define END_LINE_REG '\n'
+#define END_LINE_EXTRA '\r'
+
+int isValidArgumentsNum(int argc,char *error_msg);
+
+int isFileOpen(FILE* file,char* file_name);
+
+int readVectorFromFile(FILE* file,double* vector, int vector_size);
+
+void readExtraEndLineChar(FILE * file, char last_char);
+
+int getSampleVectorsSize(FILE* samples_file);
+
+char getSampleVectorFromFile(FILE* samples_file, double *sample_vector,int vector_size);
+
+#endif

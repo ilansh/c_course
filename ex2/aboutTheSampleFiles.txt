@@ -1,0 +1,22 @@
+About the sample files for ex2:
+
+draw.out.x : 
+the output file of the result of applying the DrawArrayDriver and selecting input option x.
+
+map.dataPoints.in.sample,
+map.separators.in.sample:
+The two input files for program SeparationMap.
+
+map.output.sample:
+The output file for using these two input files with SeparationMap.
+
+dataSet.in.x:
+A training set file.
+
+separators.perc-output.map-input.x:
+Such a file has 2 uses:
+a. the output of program Perceptron when applying the input dataSet.in.x.
+b. the input separators file for SeparationMap (just in case that the dimension is d=2).
+
+map.output.x:
+The output file of the program SeparationMap, when applying the 2 input files: dataSet.in.x and separators.perc-output.map-input.x.

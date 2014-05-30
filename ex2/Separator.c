@@ -1,0 +1,43 @@
+//##############################################################################
+// FILE       : Separator.c
+// WRITER     : Ilan Shamir, login=ilansh, id=302514401
+// EXERCISE   : slabc ex2 summer 2011
+// DESCRIPTION: This header file implements a formula for calculating the sign
+//              of a standard inner product, which is used for aranging data
+//              points acrross a finite vector space using a given separator.
+//##############################################################################
+
+#include "Separator.h"
+
+#define EPSILON 0.00000001
+
+/*
+ * Tag a new data point x (first argument - a vector of real values in
+ * dimension MAX_DIMENSION,
+ * according to the hypothesis separator vector w (second argument). 
+ * d (third argument) - the actual relevant dimension of the data.
+ */
+Tag tagNewDataPoint (const double x[MAX_DIMENSION],
+                     const double w[MAX_DIMENSION],
+                     const int d)
+{
+	int i;
+	double inner_product = 0;
+
+	for(i = 0; i < d; i++)
+	{
+		inner_product += (x[i] * w[i]);
+	}
+	if(inner_product > 0.0)
+	{
+		return POS;
+	}
+	else if(inner_product < 0.0)
+	{
+		return NEG;
+	}
+	else
+	{
+		return NOTAG;
+	}
+}

@@ -1,0 +1,110 @@
+SeparationMap dataSet.in.1 separators.perc-output.map-input.1 > my_scMap1
+diff my_scMap1 map.output.1
+SeparationMap dataSet.in.9 separators.perc-output.map-input.9 > my_scMap9
+diff my_scMap9 map.output.9
+SeparationMap map.dataPoints.in.sample map.separators.in.sample > my_scMapSample
+diff my_scMapSample map.out.sample
+SeparationMap noFile map.separators.in.sample > my_noFile1
+diff NoResponsibility_noFileSep my_noFile1
+SeparationMap dataSet.in.1 noFile > my_noFile2
+diff NoResponsibility_noFileSep my_noFile2
+SeparationMap noFile noFile > my_noFile3
+diff NoResponsibility_noFileSep my_noFile3
+SeparationMap arg1 arg2 arg3 > my_errArgs1
+diff NoResponsibility_errArgs my_errArgs1
+SeparationMap arg1 > my_errArgs2
+diff NoResponsibility_errArgs my_errArgs2
+SeparationMap > my_errArgs3
+diff NoResponsibility_errArgs my_errArgs3
+SeparationMap pnts1 sep1 > my_map1
+diff NoResponsibility_map1 my_map1
+SeparationMap pnts2 sep2 > my_map2
+diff NoResponsibility_map2 my_map2
+SeparationMap pnts3 sep3 > my_map3
+diff NoResponsibility_map3 my_map3
+SeparationMap pnts4 sep4 > my_map4
+diff NoResponsibility_map4 my_map4
+SeparationMap pnts5 sep5 > my_map5
+diff NoResponsibility_map5 my_map5
+SeparationMap pnts6 sep6 > my_map6
+diff NoResponsibility_map6 my_map6
+SeparationMap pnts7 sep7 > my_map7
+diff NoResponsibility_map7 my_map7
+SeparationMap pnts8 sep8 > my_map8
+diff NoResponsibility_map8 my_map8
+SeparationMap pnts9 sep9 > my_map9
+diff NoResponsibility_map9 my_map9
+SeparationMap pnts10 sep10 > my_map10
+diff NoResponsibility_map10 my_map10
+SeparationMap pnts11 sep11 > my_map11
+diff NoResponsibility_map11 my_map11
+SeparationMap pnts12 sep12 > my_map12
+diff NoResponsibility_map12 my_map12
+SeparationMap pnts13 sep13 > my_map13
+diff NoResponsibility_map13 my_map13
+SeparationMap pnts14 sep14 > my_map14
+diff NoResponsibility_map14 my_map14
+SeparationMap pnts15 sep15 > my_map15
+diff NoResponsibility_map15 my_map15
+SeparationMap pnts16 sep16 > my_map16
+diff NoResponsibility_map16 my_map16
+SeparationMap pnts17 sep17 > my_map17
+diff NoResponsibility_map17 my_map17
+SeparationMap pnts18 sep18 > my_map18
+diff NoResponsibility_map18 my_map18
+SeparationMap pnts19 sep19 > my_map19
+diff NoResponsibility_map19 my_map19
+Perceptron dataSet.in.1 my_scSep1
+diff my_scSep1 separators.perc-output.map-input.1
+Perceptron dataSet.in.4 my_scSep4
+diff my_scSep4 separators.perc-output.map-input.4
+Perceptron dataSet.in.9 my_scSep9
+diff my_scSep9 separators.perc-output.map-input.9
+Perceptron map.dataPoints.in.sample my_scSepSample
+diff my_scSepSample map.separators.in.sample
+Perceptron noFile my_noFile
+diff NoResponsibility_noFilePer
+Perceptron arg1 > my_errArgs4
+diff NoResponsibility_errArgsSep my_errArgs4
+Perceptron arg1 arg2 arg3 > my_errArgs5
+diff NoResponsibility_errArgsSep my_errArgs5
+Perceptron > my_errArgs6
+diff NoResponsibility_errArgsSep my_errArgs6
+Perceptron pnts1 my_sep1
+diff my_sep1 NoResponsibility_sep1
+Perceptron pnts2 my_sep2
+diff NoResponsibility_sep2 my_sep2
+Perceptron pnts3 my_sep3
+diff NoResponsibility_sep3 my_sep3
+Perceptron pnts4 my_sep4
+diff NoResponsibility_sep4 my_sep4
+Perceptron pnts5 my_sep5
+diff NoResponsibility_sep5 my_sep5
+Perceptron pnts6 my_sep6
+diff NoResponsibility_sep6 my_sep6
+Perceptron pnts7 my_sep7
+diff NoResponsibility_sep7 my_sep7
+Perceptron pnts8 my_sep8
+diff NoResponsibility_sep8 my_sep8
+Perceptron pnts9 my_sep9
+diff NoResponsibility_sep9 my_sep9
+Perceptron pnts10 my_sep10
+diff NoResponsibility_sep10 my_sep10
+Perceptron pnts11 my_sep11
+diff NoResponsibility_sep11 my_sep11
+Perceptron pnts12 my_sep12
+diff NoResponsibility_sep12 my_sep12
+Perceptron pnts13 my_sep13
+diff NoResponsibility_sep13 my_sep13
+Perceptron pnts14 my_sep14
+diff NoResponsibility_sep14 my_sep14
+Perceptron pnts15 my_sep15
+diff NoResponsibility_sep15 my_sep15
+Perceptron pnts16 my_sep16
+diff NoResponsibility_sep16 my_sep16
+Perceptron pnts17 my_sep17
+diff NoResponsibility_sep17 my_sep17
+Perceptron pnts18 my_sep18
+diff NoResponsibility_sep18 my_sep18
+Perceptron pnts19 my_sep19
+diff NoResponsibility_sep19 my_sep19

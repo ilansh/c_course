@@ -1,0 +1,24 @@
+all: Child CookieMonster
+kitchen: Jar.o Milk.o
+	mkdir kitchen
+	ar rcu libkitchen.a Jar.o Milk.o
+	ranlib libkitchen.a
+	mv libkitchen.a kitchen
+#####program compilation from ex3:###### 
+#Child: Jar.o
+#	gcc -Wall Child.c Jar.o -o Child
+#CookieMonster: Jar.o Milk.o
+#	gcc -Wall CookieMonster.c Jar.o Milk.o -o CookieMonster
+########################################
+Child: kitchen Child.c
+	gcc -Wall Child.c kitchen/libkitchen.a -o Child
+CookieMonster: kitchen CookieMonster.c
+	gcc -Wall CookieMonster.c kitchen/libkitchen.a -o CookieMonster
+Milk.o: Milk.c Milk.h
+	gcc -Wall -c Milk.c
+Jar.o: Jar.c Jar.h Cookie.o
+	gcc -Wall -c Jar.c
+Cookie.o: Cookie.c Cookie.h
+	gcc -Wall -c Cookie.c
+clean:
+	rm -r -f *.o *~ CookieMonster Child kitchen

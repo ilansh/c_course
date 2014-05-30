@@ -1,0 +1,209 @@
+//##############################################################################
+// FILE       : NimGame.c
+// WRITER     : Ilan Shamir, login=ilansh, id=302514401
+// EXERCISE   : slabc ex1 summer 2011
+// DESCRIPTION: This program implements the nim game between two human players
+//              according to rules in the exercise description.
+//##############################################################################
+
+#include <stdio.h>
+
+//***DEFINES***
+#define MAX_BALLS_TO_REMOVE 2
+
+#define BOX1 1
+
+#define BOX2 2
+
+#define NUM_OF_BALLS_EXCEPTION -1
+
+#define BALL_REGEX "o"
+
+#define SEPERATOR_REGEX "--------------------\n"
+
+#define TRUE 1
+
+#define FALSE 0
+
+#define PLAYER1 1
+
+#define PLAYER2 2
+//**************
+
+
+/*
+ * This method takes user input for the amount of balls in a single box.
+ * @param boxNum the number of box to put the balls into.
+ */
+int inputBalls(const int boxNum)
+{
+    int num_of_balls;
+    printf("How many balls in box %d?\n",boxNum);
+    scanf("%d",&num_of_balls);
+    if(num_of_balls <= 0)
+    {
+        printf("Number of balls in box must be positive.\n");
+        return NUM_OF_BALLS_EXCEPTION;
+    }
+    return num_of_balls;
+}
+
+/*
+ * Method for printing a box in a formatted fashion with 'o' characters
+ * representing the amount of balls in the box.
+ * @param box_num - number of the box.
+ * @param balls_num - number of balls in the box.
+ */
+void printOneBox(const int balls_num, const int box_num)
+{
+    int i;
+    printf("Box %d: ",box_num);
+    for(i=0; i<balls_num; i++)
+    {
+        printf(BALL_REGEX);
+    }
+    printf("\n");
+}
+
+/*
+ * This method prints the state of both boxes in the game in a formatted
+ * fashion, as described above, with a separating line above.
+ * @param box1_balls - number of balls in box1.
+ * @param box2_balls - number of balls in box2.
+ */
+void printBoxesState(const int box1_balls, const int box2_balls)
+{
+    printf(SEPERATOR_REGEX);
+    printOneBox(box1_balls,BOX1);
+    printOneBox(box2_balls,BOX2);
+}
+
+/*
+ * This method gets input from a player for choosing a box (either box 1 or
+ * box 2), and returns the chosen box.
+ * Requests for user input will continue until a legal box number is chosen.
+ * @param player_num - the number of the player choosing a box.
+ * @return the number of the chosen box.
+ */
+int chooseBox(const int player_num)
+{
+    int chosen_box;
+    do
+    { 
+        printf("Player %d, choose a box (1 or 2):\n",player_num);
+        scanf("%d",&chosen_box);
+    }
+    while(chosen_box != BOX1 && chosen_box != BOX2);
+    return chosen_box;       
+}
+
+
+/*
+ * This method gets input from a player determining the number of balls to
+ * remove from a given box.
+ * A legal number of balls is expected.
+ * @param player_num - number of the player removing the balls.
+ * @param box_num - number of the box to remove balls from.
+ * @param balls_num - number of balls currently in the given box.
+ * @return The number of balls to remove from the given box.
+ */
+int removeBalls(const int player_num, const int box_num, const int balls_num)
+{
+    int valid_choice_bool = FALSE; //indicates whether a valid choice was made.
+    int balls_to_remove;
+    while(!valid_choice_bool)
+    {
+        printf("Player %d, how many balls do you want to take from box %d?\n",
+           player_num,box_num);
+        scanf("%d",&balls_to_remove);
+        if(balls_to_remove<=0)
+        {
+            printf("Number of balls to take must be positive.\n");
+        }
+        else if(balls_to_remove > MAX_BALLS_TO_REMOVE)
+        {
+            printf("Cannot take more than %d balls at a time.\n",
+                   MAX_BALLS_TO_REMOVE);
+        }
+        else if(balls_to_remove > balls_num)
+        {
+            printf("Cannot take more balls than what's in the box.\n");
+        }
+        else
+        {
+            valid_choice_bool = TRUE;
+        }
+    }
+    return balls_to_remove;
+}
+
+
+/*
+ * This method checks if the game has ended, meaning if there are 0 balls
+ * in one of the boxes. it is called after each player's turn.
+ * If the game has ended it prints the winner.
+ * @param current_player - the player who played this turn.
+ * @param box1_balls - amount of balls in box 1.
+ * @param box2_balls - amount of balls in box 2.
+ * @return TRUE (1) if the game has ended, FALSE (0) otherwise.
+ */
+int isEndGame(const int current_player, const int box1_balls,
+              const int box2_balls)
+{
+    if(box1_balls == 0 || box2_balls == 0)
+    {
+        printBoxesState(box1_balls,box2_balls);
+        printf("Player %d wins the game.\n",current_player);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+/*
+ * The main game process method.
+ * This method runs the turns in the game, calling the required methods for
+ * each turn, until the game is finished.
+ * @param box1_balls - initial amount of balls in box1.
+ * @param box2_balls - initial amount of balls in box2.
+ */
+void gameProcess(int box1_balls,int box2_balls)
+{
+    int player_num = PLAYER1; //current player who's playing.
+    int game_end_flag = FALSE; //indicating when the game is over.
+    int chosen_box; // box chosen by the current player.
+    while(!game_end_flag)
+    {
+        printBoxesState(box1_balls,box2_balls);
+        printf("Player %d, it's your turn.\n",player_num);
+        chosen_box = chooseBox(player_num);
+        if(chosen_box == BOX1)
+        {
+            box1_balls -= removeBalls(player_num,chosen_box,box1_balls);
+        }
+        else
+        {
+            box2_balls -= removeBalls(player_num,chosen_box,box2_balls);
+        }
+        //switch between player one and player two:
+        player_num = player_num % 2 + 1;
+        game_end_flag = isEndGame(player_num,box1_balls,box2_balls);
+    }
+}        
+
+/*
+ * Main function of the program.
+ * Receives user input for initalizing the boxes and runs the gameProcess
+ * method.
+ */
+int main()
+{
+    int box1_balls, box2_balls;
+    //input balls into boxes and confirm positive number, start the game
+    //in case of legal input.
+    if((box1_balls = inputBalls(BOX1)) != NUM_OF_BALLS_EXCEPTION &&
+       (box2_balls = inputBalls(BOX2)) != NUM_OF_BALLS_EXCEPTION)
+    {
+        gameProcess(box1_balls,box2_balls);
+    }
+    return 0; 
+}

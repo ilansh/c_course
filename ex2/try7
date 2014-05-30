@@ -1,0 +1,13 @@
+#include <string.h>
+#include <stdio.h>
+
+
+void func(char *str)
+{
+        str[strlen(str)-1] = '\0';
+}
+
+int main()
+{
+        return 0;
+}

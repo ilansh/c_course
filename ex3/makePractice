@@ -1,0 +1,13 @@
+all: Child CookieMonster
+Child: Jar.o
+	gcc -Wall Child.c Jar.o -o Child
+CookieMonster: Jar.o Milk.o
+	gcc -Wall CookieMonster.c Jar.o Milk.o -o CookieMonster
+Milk.o: Milk.c Milk.h
+	gcc -Wall -c Milk.c
+Jar.o: Jar.c Jar.h Cookie.o
+	gcc -Wall -c Jar.c
+Cookie.o: Cookie.c Cookie.h
+	gcc -Wall -c Cookie.c
+clean:
+	rm -f *.o *~ CookieMonster Child

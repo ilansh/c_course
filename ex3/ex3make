@@ -1,0 +1,11 @@
+#all: PlayBoard
+#PlayBoard: Board.o
+#	gcc -Wall PlayBoard.c Board.o -o PlayBoard
+#TestBoard2: Board.o
+#	gcc -Wall TestBoard2.c Board.o -o TestBoard2
+Board.o: Board.c Board.h ErrorHandle.o
+	gcc -Wall -c Board.c
+ErrorHandle.o: ErrorHandle.c ErrorHandle.h
+	gcc -Wall -c ErrorHandle.c
+clean:
+	rm -f *.o *~
